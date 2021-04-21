@@ -1,24 +1,53 @@
+//!A simple library to generate match schedules for games like billiards
+//!
+//!This library consists of a single struct, that can be initiated with a list of player names
+//!it's hopefully easy to use and offers only basic functionality. 
+//!
+//!Keep note: when the number of players is uneven, a dummy player is added.
+//!
+//!# Example:
+//!
+//!To generate a match schedule for say 3 players, use the library like this:
+//!
+//!```
+//!     use round_robit::RoundRobin;
+//!     let player_names = vec!["Player one".to_string(),
+//!                             "Player two".to_string(),
+//!                             "Player three".to_string()
+//!                             ];
+//!     let round_robin = RoundRobin::new_with_participants(player_names);
+//!     let schedule = round_robin.generate_circle_method();
+//!```
+//!
+//! here `schedule` will hold a vec of rounds, where every round is a vec of single matches.
+//! structurally it looks like this:
+//!
+//!`[[("Player one", "Dummy Player"), ("Player two", "Player three")], [("Player one", "Player three"), ("Dummy Player", "Player two")], [("Player one", "Player two"), ("Player three", "Dummy Player")]]`
+
+///The main struct that allows you to generate schedules
+///
+///
+///
 pub struct RoundRobin {
     participants: Vec<String>,
 }
 
 impl RoundRobin {
-    pub fn new() -> Self {
-        RoundRobin {
-            participants: vec![],
-        }
-    }
+    ///returns a new instance of the roundrobin generator, pass it a list of contestant names as
+    ///Strings
     pub fn new_with_participants(participants: Vec<String>) -> Self {
         RoundRobin {
             participants: participants,
         }
     }
-
+    ///return the list of participants provided as arguments for creating the roundrobin struct
     pub fn get_participants(&self) -> &Vec<String> {
         &self.participants //.clone()
     }
 
-    //print the matches, utility function
+    ///print the matches, utility function
+    ///
+    ///takes a schedule in the form of ```Vec<Vec<(String,String)>>```
     pub fn print_schedule(schedule: Vec<Vec<(String, String)>>) {
         for round in schedule {
             for single_match in round {
@@ -27,7 +56,18 @@ impl RoundRobin {
             println!("\n");
         }
     }
-    //generate a match schedule with the circle method
+
+    ///generates the actual matches, in the for of a list of rounds to play.
+    ///rounds are a combination of two players, here structed as a tuple
+    ///
+    ///a schedule with two rounds, would look like this:
+    ///```
+    /// vec![ //the outer vec, the "collection of rounds"
+    ///
+    ///     vec![("a","b"),("c","d")],//a round, player a against b, and c against d
+    ///     vec![("e","f"),("g","h")],//another round. 
+    ///]
+    ///```
     pub fn generate_circle_method(&self) -> Vec<Vec<(String, String)>> {
         //get the collection of players
         let mut tmp_element = self.participants.clone();
