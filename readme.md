@@ -14,4 +14,4 @@ let player_names = vec!["Player one".to_string(),
 `
 
 ## more info
-for any more information, I would suggest to just clone this library and check it out the rustdoc stuff
+for any more information, I would suggest to just clone this library and check out the rustdoc stuff
