@@ -1,9 +1,9 @@
-#Round robin in rust
+# Round robin in rust
 
-##goal:
+## goal:
 A simple rust library that just generates a competition schedule based on a list of names.
 
-##usage:
+## usage:
 `
 let player_names = vec!["Player one".to_string(),
                              "Player two".to_string(),
