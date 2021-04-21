@@ -62,11 +62,11 @@ impl RoundRobin {
     ///
     ///a schedule with two rounds, would look like this:
     ///```
-    /// vec![ //the outer vec, the "collection of rounds"
+    ///let example =  vec![ //the outer vec, the "collection of rounds"
     ///
     ///     vec![("a","b"),("c","d")],//a round, player a against b, and c against d
     ///     vec![("e","f"),("g","h")],//another round. 
-    ///]
+    ///];
     ///```
     pub fn generate_circle_method(&self) -> Vec<Vec<(String, String)>> {
         //get the collection of players
