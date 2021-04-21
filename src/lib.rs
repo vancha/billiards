@@ -75,6 +75,9 @@ impl RoundRobin {
 mod tests {
     use super::*;
     #[test]
+    //this test uses the example on
+    //https://en.wikipedia.org/wiki/Round-robin_tournament#Circle_method, but with 6 instead of 14
+    //players
     fn it_works() {
         let x = RoundRobin::new_with_participants(vec![
             std::string::String::from("1"),
